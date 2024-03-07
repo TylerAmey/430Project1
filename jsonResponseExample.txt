@@ -1,0 +1,51 @@
+{
+	"status":200,
+	"data":{
+		"id":"Backpack_ArcticIceBlue",
+		"name":"Gohan's Cape",
+		"description":"A gift from Piccolo to inspire him to return to training.",
+		"customExclusiveCallout":"Hidden when not equipped along with Son Gohan Outfit.",
+		"type":{
+			"value":"backpack",
+			"displayValue":"Back Bling",
+			"backendValue":"AthenaBackpack"
+		},
+		"rarity":{
+			"value":"legendary",
+			"displayValue":"Legendary",
+			"backendValue":"EFortRarity::Legendary"
+		},
+		"series":null,
+		"set":{
+			"value":"Dragon Ball",
+			"text":"Part of the Dragon Ball set.",
+			"backendValue":"WordRemark"
+		},
+		"introduction":{
+			"chapter":"4",
+			"season":"1",
+			"text":"Introduced in Chapter 4, Season 1.",
+			"backendValue":23
+		},
+		"images":{
+			"smallIcon":"https://fortnite-api.com/images/cosmetics/br/backpack_arcticiceblue/smallicon.png",
+			"icon":"https://fortnite-api.com/images/cosmetics/br/backpack_arcticiceblue/icon.png",
+			"featured":null,
+			"lego":null,
+			"other":null
+		},
+		"variants":null,
+		"searchTags":null,
+		"gameplayTags":["Cosmetics.Backpack.IsCape","Cosmetics.Set.WordRemark","Cosmetics.Filter.Season.23","Cosmetics.Source.ItemShop"],
+		"metaTags":["Cosmetics.MetaTags.ArcticIce.Cape"],
+		"showcaseVideo":null,
+		"dynamicPakId":null,
+		"itemPreviewHeroPath":"FortniteGame/Content/Athena/Items/Cosmetics/Characters/Character_ArcticIceBlue",
+		"displayAssetPath":null,
+		"definitionPath":null,
+		"path":"FortniteGame/Content/Athena/Items/Cosmetics/Backpacks/Backpack_ArcticIceBlue",
+		"added":"2023-01-31T09:00:00Z",
+		"shopHistory":["2023-01-31T00:00:00Z","2023-02-01T00:00:00Z","2023-02-02T00:00:00Z","2023-02-03T00:00:00Z","2023-02-04T00:00:00Z","2023-02-05T00:00:00Z","2023-02-06T00:00:00Z","2023-02-07T00:00:00Z","2023-02-08T00:00:00Z","2023-02-09T00:00:00Z","2023-02-10T00:00:00Z","2023-02-11T00:00:00Z","2023-02-12T00:00:00Z","2023-02-13T00:00:00Z","2023-05-20T00:00:00Z","2023-05-21T00:00:00Z","2023-05-22T00:00:00Z","2023-05-23T00:00:00Z","2023-05-24T00:00:00Z","2023-10-20T00:00:00Z","2023-10-21T00:00:00Z","2023-10-22T00:00:00Z","2023-10-23T00:00:00Z","2023-10-24T00:00:00Z","2024-01-03T00:00:00Z","2024-01-04T00:00:00Z","2024-01-05T00:00:00Z","2024-01-06T00:00:00Z","2024-01-07T00:00:00Z"]
+	},
+	"message":"Gohan's Cape added to Wishlist"
+}

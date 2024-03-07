@@ -1,0 +1,26 @@
+{
+  "name": "http-api-assignment-ii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylerAmey/http-api-assignment-ii.git"
+  },
+  "author": "Tyler Amey",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/TylerAmey/http-api-assignment-ii/issues"
+  },
+  "homepage": "https://github.com/TylerAmey/http-api-assignment-ii#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1"
+  }
+}

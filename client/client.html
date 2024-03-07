@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Our simple HTTP server</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  
+  <script>
+
+    const handleResponse = async (response, parseResponse) => {
+      
+      const content = document.querySelector('#content');
+
+      switch(response.status) {
+        case 200: 
+          content.innerHTML = `<b></b>`;
+          break;
+        case 201:
+          content.innerHTML = `<b>Created</b>`;
+          break;
+        case 204:
+          content.innerHTML = '<b>204 Updated No Content<b>';
+          break;
+        case 400: 
+          content.innerHTML = `<b>400 Bad Request</b>`;
+          break;
+        case 404:
+          content.innerHTML = `<b>404 Resource Not Found</b>`;
+          break;
+        default: 
+          content.innerHTML = `Error code not implemented by client.`;
+          break;
+      }
+
+      let func = response.url.split("/")[response.url.split("/").length-1];
+
+      if (func == "addCosmetic"){
+        if(parseResponse) {
+
+        let obj = await response.json();
+
+        let jsonString;
+
+        if(obj.message){
+          jsonString = JSON.stringify(obj.message);
+        }
+        content.innerHTML += `<p>${jsonString}</p>`; 
+
+        } else {
+          let obj = await response.json();
+
+          if(obj.message){
+            content.innerHTML += `<p>${obj.message}</p>`;
+          }
+        }
+      }
+
+      else if(func == "lastSeen"){
+        let obj = await response.json();
+
+        content.innerHTML += `<h1>Last Seen Items</1>`;
+        for (let key in obj.cosmetics){
+            let cosmetic = obj.cosmetics[key];
+            let date = cosmetic.lastSeen.split("-");
+            const months = [
+              "January", "February", "March", "April",
+              "May", "June", "July", "August",
+              "September", "October", "November", "December"
+            ];
+            let month = parseInt(date[1], 10);
+            const day = date[2].startsWith('0') ? parseInt(date[2][1]) : parseInt(date[2]);
+            content.innerHTML += `<p>${cosmetic.name} was last seen ${months[month - 1]} ${day}, ${date[0]}`;
+            content.innerHTML += `<img src=${cosmetic.image} alt=${cosmetic.name}>`;
+          }
+      }
+
+      else if(func == "itemShop"){
+        let obj = await response.json();
+
+        for (let key in obj.cosmetics){
+            let cosmetic = obj.cosmetics[key];
+
+            if(!cosmetic.inShop){
+              content.innerHTML += `<p class="notInShop">${cosmetic.name} is not currently in the shop`;
+              content.innerHTML += `<img src=${cosmetic.image} alt=${cosmetic.name}>`;
+            }
+            else{
+              content.innerHTML += `<p class="inShop">It's your lucky day! ${cosmetic.name} is in the shop!`
+              content.innerHTML += `<img src=${cosmetic.image} alt=${cosmetic.name}>`;
+            }
+        }
+      }
+
+      else{
+        let obj = await response.json();
+
+        if(obj.message){
+          content.innerHTML += `<p>${obj.message}</p>`;
+        }
+      }
+    };
+
+    const sendPost = async (nameForm) => {
+
+      const nameAction = nameForm.getAttribute('action');
+      const nameMethod = nameForm.getAttribute('method');
+      
+      const nameField = nameForm.querySelector('#nameField');
+
+      const formData = `name=${nameField.value}`;
+
+      let response = await fetch(nameAction, {
+        method: nameMethod,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+        },
+        body: formData,
+      });
+
+      handleResponse(response);
+    };
+
+    const requestUpdate = async (actionForm) => {
+      
+      const url = actionForm.querySelector('#urlField').value;
+      
+      let response = await fetch(url, {
+        headers: {
+            'Accept': 'application/json'
+        },
+      });
+
+      handleResponse(response);
+    };
+
+    const init = () => {
+
+      const actionForm = document.querySelector('#actionForm');
+      const nameForm = document.querySelector('#nameForm');
+
+      const addCosmetic = (e) => {
+        e.preventDefault();
+        sendPost(nameForm);
+        return false;
+      }
+      
+      const getCosmetics = (e) => {
+        e.preventDefault();
+        requestUpdate(actionForm);
+        return false;
+      }
+      
+      nameForm.addEventListener('submit', addCosmetic);
+
+      actionForm.addEventListener('submit', getCosmetics);
+
+    };
+
+    window.onload = init;
+  </script>
+</head>
+<body>
+  <section id="top">
+    <h1>Fortnite Cosmetic Wish List</h1>
+    <h3>Enter your cosmetic's name to add to your wishlist!</h3>
+    <form id="nameForm" action="/addCosmetic" method="post">
+      <input id="nameField" type="text" name="name" />
+      <input class ="styledButton" type="submit" value="Add to Wishlist" />
+    </form>
+    <h3>Interact with your wishlist!</h3>
+    <form id="actionForm" action="/getCosmetics" method="get">
+      <select class ="styledButton" id='urlField'>
+        <option value='/itemShop'>Check Item Shop</option>
+        <option value='/lastSeen'>Last Seen</option>
+      </select>
+      <input class ="styledButton" type="submit" value="Search"/>
+    </form>
+  </section>
+  <section id="content">
+  </section>
+</body>
+</html>
